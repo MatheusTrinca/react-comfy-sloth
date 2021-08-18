@@ -6,9 +6,22 @@ const Stars = ({ stars, reviews }) => {
   // <span>
   //   {stars >= 1 ? <BsStarFill /> : stars >= 0.5 ? <BsStarHalf /> : <BsStar />}
   // </span>; Ir repetindo mais 5x, acrescentando 2 e 1.5, 3 e 2.5, 4 e 3.5, 5 e 4.5
+  const tempStars = Array.from({ length: 5 }, (_, index) => {
+    return (
+      <span key={index}>
+        {stars >= index + 1 ? (
+          <BsStarFill />
+        ) : stars >= index + 1 - 0.5 ? (
+          <BsStarHalf />
+        ) : (
+          <BsStar />
+        )}
+      </span>
+    );
+  });
   return (
     <Wrapper>
-      <div className="stars"></div>
+      <div className="stars">{tempStars}</div>
       <p className="reviews">({reviews} customers reviews)</p>
     </Wrapper>
   );
