@@ -25,11 +25,13 @@ const Filters = () => {
   const companies = getUniqueValues(allProducts, 'company');
   const colors = getUniqueValues(allProducts, 'colors');
 
+  console.log(colors);
+
   return (
     <Wrapper>
       <div className="content">
         <form onSubmit={e => e.preventDefault()}>
-          {/* Search Input */}
+          {/* Search Input (text) */}
           <div className="form-control">
             <input
               type="text"
