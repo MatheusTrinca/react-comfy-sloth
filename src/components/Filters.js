@@ -30,7 +30,7 @@ const Filters = () => {
   return (
     <Wrapper>
       <div className="content">
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={e => e.preventDefault()}>
           {/* Search Input (text) */}
           <div className="form-control">
             <input
@@ -113,7 +113,36 @@ const Filters = () => {
             </div>
           </div>
           {/* End of Colors */}
+          {/* Price -> input range -> transformar em Number */}
+          <div className="form-control">
+            <h5>Price</h5>
+            <p className="price">{formatPrice(price)}</p>
+            <input
+              type="range"
+              name="price"
+              onChange={updateFilters}
+              value={price}
+              min={minPrice}
+              max={maxPrice}
+            />
+          </div>
+          {/* End of Price */}
+          {/* Shipping -> e.target.checked */}
+          <div className="form-control shipping">
+            <label htmlFor="shipping">free shipping</label>
+            <input
+              type="checkbox"
+              name="shipping"
+              id="shipping"
+              onChange={updateFilters}
+              checked={shipping}
+            />
+          </div>
+          {/* End of Shipping */}
         </form>
+        <button type="button" className="clear-btn" onClick={clearFilters}>
+          clear filters
+        </button>
       </div>
     </Wrapper>
   );

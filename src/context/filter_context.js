@@ -56,26 +56,32 @@ export const FilterProvider = ({ children }) => {
     dispatch({ type: SET_LISTVIEW });
   };
 
-  const updateSort = (e) => {
+  const updateSort = e => {
     //const name = e.target.name;
     const value = e.target.value;
     dispatch({ type: UPDATE_SORT, payload: value });
   };
 
-  const updateFilters = (e) => {
+  const updateFilters = e => {
     e.preventDefault();
     let name = e.target.name;
     let value = e.target.value;
-    if (e.target.name === 'category') {
+    if (name === 'category') {
       value = e.target.textContent;
-    } else if (e.target.name === 'color') {
+    } else if (name === 'color') {
       value = e.target.dataset.color;
+    } else if (name === 'price') {
+      value = +value;
+    } else if (name === 'shipping') {
+      value = e.target.checked;
     }
 
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };
 
-  const clearFilters = () => {};
+  const clearFilters = () => {
+    dispatch({ type: CLEAR_FILTERS });
+  };
 
   return (
     <FilterContext.Provider
