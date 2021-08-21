@@ -30,7 +30,7 @@ const Filters = () => {
   return (
     <Wrapper>
       <div className="content">
-        <form onSubmit={e => e.preventDefault()}>
+        <form onSubmit={(e) => e.preventDefault()}>
           {/* Search Input (text) */}
           <div className="form-control">
             <input
@@ -43,6 +43,76 @@ const Filters = () => {
             />
           </div>
           {/* End of Search Input */}
+          {/* Categories (button -> textContent) */}
+          <div className="form-control">
+            <h5>Category</h5>
+            <div>
+              {categories.map((cat, index) => (
+                <button
+                  key={index}
+                  onClick={updateFilters}
+                  type="button"
+                  name="category"
+                  className={`${
+                    cat.toLowerCase() === category ? 'active' : null
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+          {/* End of Categories */}
+          {/* Companies */}
+          <div className="form-control">
+            <h5>Company</h5>
+            <select
+              name="company"
+              onChange={updateFilters}
+              className="company"
+              value={company}
+            >
+              {companies.map((comp, index) => (
+                <option key={index} value={comp}>
+                  {comp}
+                </option>
+              ))}
+            </select>
+          </div>
+          {/* End of Companies */}
+          {/* Colors -> data-set */}
+          <div className="form-control">
+            <h5>Color</h5>
+            <div className="colors">
+              {colors.map((col, index) => {
+                if (col === 'all') {
+                  return (
+                    <button
+                      name="color"
+                      onClick={updateFilters}
+                      data-color="all"
+                      className={`all-btn ${color === 'all' && 'active'}`}
+                    >
+                      all
+                    </button>
+                  );
+                }
+                return (
+                  <button
+                    onClick={updateFilters}
+                    key={index}
+                    className={`color-btn ${color === col && 'active'}`}
+                    name="color"
+                    style={{ backgroundColor: col }}
+                    data-color={col}
+                  >
+                    {color === col && <FaCheck />}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          {/* End of Colors */}
         </form>
       </div>
     </Wrapper>

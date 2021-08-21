@@ -56,16 +56,22 @@ export const FilterProvider = ({ children }) => {
     dispatch({ type: SET_LISTVIEW });
   };
 
-  const updateSort = e => {
+  const updateSort = (e) => {
     //const name = e.target.name;
     const value = e.target.value;
     dispatch({ type: UPDATE_SORT, payload: value });
   };
 
-  const updateFilters = e => {
+  const updateFilters = (e) => {
     e.preventDefault();
-    const name = e.target.name;
-    const value = e.target.value;
+    let name = e.target.name;
+    let value = e.target.value;
+    if (e.target.name === 'category') {
+      value = e.target.textContent;
+    } else if (e.target.name === 'color') {
+      value = e.target.dataset.color;
+    }
+
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };
 
